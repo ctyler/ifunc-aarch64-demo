@@ -30,15 +30,15 @@
 // they're just for demonstration purposes!)
 //
 void *foo_sve2() {
-	printf("Using SVE2 implementation.\n");
+	printf("  Using SVE2 implementation.\n");
 };
           
 void *foo_sve() {
-	printf("Using SVE implementation.\n");
+	printf("  Using SVE implementation.\n");
 };
           
 void *foo_nonsve() {
-	printf("Using non-SVE/SVE2 implementation.\n");
+	printf("  Using non-SVE/SVE2 implementation.\n");
 };
           
 
@@ -57,6 +57,7 @@ static void (*resolve_foo(void)) {
 	long hwcaps  = getauxval(AT_HWCAP);
 	long hwcaps2 = getauxval(AT_HWCAP2);
 
+	printf("\n### Resolver function - selecting the implementation to use for foo()\n");
 	if (hwcaps2 & HWCAP2_SVE2) {
 		return foo_sve2;
 	} else if (hwcaps2 && HWCAP_SVE) {
@@ -76,7 +77,10 @@ void *foo ()
 // Main code
 int main() {
 
-	foo();
+	for (int i=0; i<3; i++) {
+		printf("Calling foo() from main()...");
+		foo();
+	}
 
 }
 
