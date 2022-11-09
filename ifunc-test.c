@@ -60,7 +60,7 @@ static void (*resolve_foo(void)) {
 	printf("\n### Resolver function - selecting the implementation to use for foo()\n");
 	if (hwcaps2 & HWCAP2_SVE2) {
 		return foo_sve2;
-	} else if (hwcaps2 && HWCAP_SVE) {
+	} else if (hwcaps & HWCAP_SVE) {
 		return foo_sve;
 	} else {
 		return foo_nonsve;
@@ -70,8 +70,7 @@ static void (*resolve_foo(void)) {
 // Prototype for function foo(), which will resolve to
 // one of the three implementations depending on system
 // capabilities     
-void *foo ()
-	__attribute__ ((ifunc ("resolve_foo")));
+void *foo () __attribute__((ifunc("resolve_foo")));
 
 
 // Main code
