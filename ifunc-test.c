@@ -19,11 +19,12 @@
  *
  */
 
+#ifdef __aarch64__
+
 #include <stdio.h>
 #include <sys/auxv.h>
 #include <asm/hwcap.h>
 
-#ifdef __aarch64__
 // Three implementations of foo() for three HW configurations
 //
 // (Obviously, these don't take advantage of the hardware,
