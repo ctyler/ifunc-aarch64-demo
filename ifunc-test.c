@@ -23,7 +23,6 @@
 
 #include <stdio.h>
 #include <sys/auxv.h>
-#include <asm/hwcap.h>
 
 // Three implementations of foo() for three HW configurations
 //
